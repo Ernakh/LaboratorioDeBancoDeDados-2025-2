@@ -144,6 +144,23 @@ where grupo.nome in ('Anquilossauros', 'Ceratopsídeos')
 
 
 
+--Crie uma consulta para relacionar todos os dados disponíveis de todos 
+--os dinossauros existentes em ordem alfabética de Descobridor;
+
+
+select 
+	dinossauro.id, dinossauro.nome, grupo.nome as Grupo, descobridor.nome as Descobridor,
+	year(dinossauro.ano_descoberta) as Ano, dinossauro.inicio, dinossauro.fim,
+	era.nome as Era, pais.nome as 'Descoberto em'
+from dinossauro
+join grupo on grupo.id = dinossauro.fk_grupo
+join descobridor on descobridor.id = dinossauro.fk_descobridor
+join era on era.id = dinossauro.fk_era
+join pais on pais.id = dinossauro.fk_pais
+order by descobridor.nome
+
+
+
 
 
 --1. Faça uma trigger que valide os anos iniciais e finais da existência do dinossauro 
