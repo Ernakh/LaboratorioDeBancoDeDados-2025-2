@@ -88,8 +88,8 @@ INSERT INTO EVENTOS VALUES ('Formatura Academia .Net', '2022-01-15', '2022-01-15
 
 select * from EVENTOS
 
-INSERT INTO PESSOAS VALUES ('01311121180', 'Fabrício', 'fabricio.londero@ufn.edu.br','5555558498');
-INSERT INTO PESSOAS(cpf, nome, email) VALUES ('01333221180', 'Glauber', 'glauber@ufn.edu.br');
+INSERT INTO PESSOAS VALUES ('01311121180', 'Fabrício', 'fabricio.londero@teste.edu.br','5555558498');
+INSERT INTO PESSOAS(cpf, nome, email) VALUES ('01333221180', 'Glauber', 'glauber@teste.edu.br');
 INSERT INTO PESSOAS(cpf, nome, fone) VALUES ('01783221180', 'Elias', '9854556422');
 INSERT INTO PESSOAS(cpf, nome, email) VALUES ('01783221180', 'Elias', '');
 
