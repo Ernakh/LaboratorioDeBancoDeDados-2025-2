@@ -3,6 +3,46 @@
 Crie tabelas Produtos (com Estoque) e Vendas.
 Faça um trigger em Vendas que diminua a quantidade em Produtos.
 
+  
+CREATE TABLE Produtos (
+    id INT PRIMARY KEY identity,
+    Nome VARCHAR(100),
+    Estoque INT
+);
+
+CREATE TABLE Vendas (
+    id INT PRIMARY KEY identity,
+    ProdutoID INT,
+    Quantidade INT,
+    FOREIGN KEY (ProdutoID) REFERENCES Produtos(id)
+);
+
+
+CREATE TRIGGER trg_AfterInsert_Vendas
+ON Vendas
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE p
+    SET p.Estoque = p.Estoque - i.Quantidade
+    FROM Produtos p
+    INNER JOIN inserted i ON p.ProdutoID = i.ProdutoID;
+END;
+GO
+
+
+INSERT INTO Produtos VALUES (1, 'Teclado', 50);
+
+INSERT INTO Vendas VALUES (2, 1, 5); 
+
+SELECT * FROM Produtos; 
+select * from vendas
+
+
+  
+
 - Impedir Atualização de Preço Negativo
 Em Produtos, crie um trigger AFTER UPDATE que verifique se o preço atualizado é menor que zero.
 Se for, cancele a operação e exiba um erro personalizado.
