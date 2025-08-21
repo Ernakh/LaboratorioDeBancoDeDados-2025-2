@@ -103,3 +103,42 @@ begin
 		end
 end
 
+
+
+
+create table pessoa
+(
+	id integer primary key identity,
+	nome varchar(50) not null,
+	idade integer not null,
+	maioridade varchar(3)
+)
+
+create trigger pessoatrigger
+on pessoa
+after insert 
+as 
+begin
+	declare @idade integer
+	select @idade = (select inserted.idade from inserted)
+
+	if @idade > 17
+		begin
+			update pessoa set maioridade = 'sim' 
+			where pessoa.id = (select inserted.id from inserted 
+								join pessoa
+								on inserted.id = pessoa.id)
+		end
+		else
+			begin
+				update pessoa set maioridade = 'não' 
+			where pessoa.id = (select inserted.id from inserted 
+								join pessoa
+								on inserted.id = pessoa.id)
+			end
+end
+
+
+
+
+
